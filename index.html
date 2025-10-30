@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreX: Персональные Онлайн-Тренировки и Программы с Гарантией Результата</title>
+    <meta name="description" content="CoreX — эффективные онлайн-программы тренировок от Мастера спорта. Построю тело мечты без отката в короткий срок. Личный кабинет, видеоинструкции, обратная связь.">
+    <meta name="robots" content="index, follow"> 
+    <link rel="canonical" href="https://CoreX.ru/index.html"> 
+    <meta property="og:title" content="CoreX: Персональные Онлайн-Тренировки с Гарантией Результата">
+    <meta property="og:description" content="Эффективные программы тренировок для набора массы и похудения от Мастера спорта. Личный кабинет, видеоинструкции, обратная связь.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://CoreX.ru/index.html">
+    <meta property="og:image" content="https://CoreX.ru/images/homeprofile.png"> 
+    <meta property="og:site_name" content="CoreX">
+    <link rel="icon" type="image/png" href="/favicon.png"> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" /> 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-[#fefae0] text-[#283618] dark:bg-slate-900 dark:text-slate-300">
+
+<!-- Навигация -->
+<nav class="fixed w-full z-20 top-0 start-0 bg-[#fefae0] border-b border-[#dda15e] shadow-md dark:bg-slate-900 dark:border-slate-700">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="index.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <span class="self-center text-2xl font-bold whitespace-nowrap text-[#283618] dark:text-[#fefae0]">CoreX</span>
+    </a>
+    <div id="auth-controls" class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <!-- Кнопка "Войти" (для неавторизованных пользователей, скрыта по умолчанию) -->
+        <a href="login.html" id="login-button" class="hidden text-white bg-[#bc6c25] hover:bg-[#dda15e] focus:ring-4 focus:outline-none focus:ring-[#bc6c25]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition">Войти</a>
+
+        <!-- Меню пользователя (для авторизованных, скрыто по умолчанию) -->
+        <div id="user-menu-container" class="hidden">
+            <!-- Иконка для десктопа -->
+            <button type="button" id="user-menu-button" data-dropdown-toggle="user-dropdown" class="hidden md:inline-flex items-center justify-center w-10 h-10 text-[#283618] hover:bg-gray-200 rounded-full focus:ring-4 focus:ring-gray-200 dark:text-slate-300 dark:hover:bg-slate-700 dark:focus:ring-slate-600">
+                <span class="sr-only">Открыть меню пользователя</span>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+            </button>
+            <!-- Кнопка "Кабинет" для мобильных -->
+            <a href="account.html" id="mobile-account-link" class="md:hidden text-white bg-[#bc6c25] hover:bg-[#dda15e] focus:ring-4 focus:outline-none focus:ring-[#bc6c25]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition">Кабинет</a>
+
+            <!-- Выпадающее меню -->
+            <div id="user-dropdown" class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-slate-800 dark:divide-slate-700">
+                <div class="px-4 py-3">
+                  <span class="block text-sm text-gray-900 dark:text-white">Личный кабинет</span>
+                  <span id="user-email-display" class="block text-sm text-gray-500 truncate dark:text-slate-400"></span>
+                </div>
+                <ul class="py-2" aria-labelledby="user-menu-button">
+                  <li>
+                    <a href="account.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-slate-300 dark:hover:bg-slate-700 dark:hover:text-white">Мои программы</a>
+                  </li>
+                  <li>
+                    <a href="#" id="logout-link" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-slate-300 dark:hover:bg-slate-700 dark:hover:text-white">Выйти</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Кнопка мобильного меню ("бургер") -->
+        <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-slate-400 dark:hover:bg-slate-800 dark:focus:ring-slate-700" aria-controls="navbar-default" aria-expanded="false">
+            <span class="sr-only">Открыть главное меню</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+        </button>
+    </div>
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-default">
+      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-200 rounded-lg bg-[#fefae0] md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-[#fefae0] dark:bg-slate-900 md:dark:bg-slate-900 dark:border-slate-700">
+        <li>
+          <a href="#about" class="block py-2 px-3 text-[#283618] rounded md:bg-transparent md:p-0 hover:text-[#bc6c25] dark:text-slate-300 dark:hover:text-[#dda15e]">О подходе</a>
+        </li>
+        <li>
+          <a href="programs.html" class="block py-2 px-3 text-[#283618] rounded md:bg-transparent md:p-0 hover:text-[#bc6c25] dark:text-slate-300 dark:hover:text-[#dda15e]">Программы</a>
+        </li>
+        <li>
+          <a href="#reviews" class="block py-2 px-3 text-[#283618] rounded md:bg-transparent md:p-0 hover:text-[#bc6c25] dark:text-slate-300 dark:hover:text-[#dda15e]">Отзывы</a>
+        </li>
+        <li>
+          <a href="#faq" class="block py-2 px-3 text-[#283618] rounded md:bg-transparent md:p-0 hover:text-[#bc6c25] dark:text-slate-300 dark:hover:text-[#dda15e]">Вопрос-ответ</a>
+        </li>
+        <li>
+          <a href="contacts.html" class="block py-2 px-3 text-[#283618] rounded md:bg-transparent md:p-0 hover:text-[#bc6c25] dark:text-slate-300 dark:hover:text-[#dda15e]">Контакты</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="pt-32 pb-16">
+    <div class="max-w-screen-xl mx-auto">
+        <div class="bg-stone-100 rounded-3xl shadow-xl overflow-hidden grid md:grid-cols-2 items-center dark:bg-slate-800">
+            <!-- Text Content -->
+            <div class="p-8 md:p-12 lg:p-16 text-left" data-aos="fade-right">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 text-[#283618] leading-tight dark:text-[#fefae0]">Построю тебе тело мечты в короткий срок и без отката</h1>
+                <p class="text-lg mb-8 text-gray-700 dark:text-slate-400">Эффективные программы тренировок с обратной связью и личными рекомендациями на продвинутой платформе.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="programs.html" class="bg-[#bc6c25] hover:bg-[#dda15e] px-8 py-3 rounded-lg text-lg text-white font-semibold shadow-md hover:shadow-lg transition transform hover:-translate-y-1">Выбрать программу</a>
+                    <a href="#about" class="bg-transparent border-2 border-[#606c38] text-[#606c38] hover:bg-[#606c38] hover:text-white px-8 py-3 rounded-lg text-lg font-semibold transition dark:border-[#a3b18a] dark:text-[#a3b18a] dark:hover:bg-[#a3b18a] dark:hover:text-slate-900">Подробнее</a>
+                </div>
+            </div>
+            <!-- Image -->
+            <div class="h-96 md:h-[32rem]" data-aos="fade-left">
+                <img src="images/homeprofile.png" alt="Тренер CoreX" class="w-full h-full object-cover object-center" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Факты -->
+<section class="max-w-screen-xl mx-auto py-12 px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+  <div data-aos="fade-up" data-aos-delay="0">
+    <h3 class="text-4xl font-bold text-[#606c38] dark:text-[#a3b18a]">7000+</h3>
+    <p class="mt-2 text-gray-600 dark:text-slate-400">Клиентов</p>
+  </div>
+  <div data-aos="fade-up" data-aos-delay="100">
+    <h3 class="text-4xl font-bold text-[#606c38] dark:text-[#a3b18a]">Мастер спорта</h3>
+    <p class="mt-2 text-gray-600 dark:text-slate-400">по жиму лёжа</p>
+  </div>
+  <div data-aos="fade-up" data-aos-delay="200">
+    <h3 class="text-4xl font-bold text-[#606c38] dark:text-[#a3b18a]">13 лет</h3>
+    <p class="mt-2 text-gray-600 dark:text-slate-400">стажа в зале</p>
+  </div>
+</section>
+
+<!-- Преимущества -->
+<section id="about" class="bg-[#606c38] py-12 px-4 scroll-mt-20">
+  <div class="max-w-screen-xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-8 text-[#fefae0]" data-aos="fade-down">Тренировки с CoreX — это</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Карточка 1 -->
+      <div class="bg-[#fefae0] rounded-lg shadow-lg overflow-hidden flex flex-col dark:bg-slate-800" data-aos="fade-up" data-aos-delay="0">
+        <img src="images/effective.png" alt="Доказанная эффективность" class="w-full h-48 object-cover" loading="lazy">
+        <div class="p-6 flex-grow flex flex-col">
+          <h3 class="font-bold text-xl mb-2 text-[#283618] dark:text-[#fefae0]">Доказанная эффективность</h3>
+          <p class="text-gray-700 dark:text-slate-400">Система тренировок построена на базе научных исследований, подкрепленных практикой.</p>
+        </div>
+      </div>
+      <!-- Карточка 2 -->
+      <div class="bg-[#fefae0] rounded-lg shadow-lg overflow-hidden flex flex-col dark:bg-slate-800" data-aos="fade-up" data-aos-delay="100">
+        <img src="images/load.png" alt="Баланс нагрузки" class="w-full h-48 object-cover" loading="lazy">
+        <div class="p-6 flex-grow flex flex-col">
+          <h3 class="font-bold text-xl mb-2 text-[#283618] dark:text-[#fefae0]">Баланс нагрузки для любого уровня</h3>
+          <p class="text-gray-700 dark:text-slate-400">Чтобы не убить мотивацию и желание возвращаться в зал.</p>
+        </div>
+      </div>
+      <!-- Карточка 3 -->
+      <div class="bg-[#fefae0] rounded-lg shadow-lg overflow-hidden flex flex-col dark:bg-slate-800" data-aos="fade-up" data-aos-delay="200">
+        <img src="images/month.png" alt="Видимые результаты" class="w-full h-48 object-cover" loading="lazy">
+        <div class="p-6 flex-grow flex flex-col">
+          <h3 class="font-bold text-xl mb-2 text-[#283618] dark:text-[#fefae0]">Никаких топтаний на месте</h3>
+          <p class="text-gray-700 dark:text-slate-400">Видимые результаты уже в первые месяцы тренировок.</p>
+        </div>
+      </div>
+      <!-- Карточка 4 (Видео) -->
+      <div class="bg-[#fefae0] rounded-lg shadow-lg overflow-hidden flex flex-col dark:bg-slate-800" data-aos="fade-up" data-aos-delay="300">
+        <div class="h-48 w-full bg-[#283618] dark:bg-slate-700">
+          <video class="w-full h-full object-cover" autoplay loop muted playsinline controls>
+            <source src="video/video.mp4" type="video/mp4">
+            Твой браузер не поддерживает видео.
+          </video>
+        </div>
+        <div class="p-6 flex-grow flex flex-col">
+          <h3 class="font-bold text-xl mb-2 text-[#283618] dark:text-[#fefae0]">Разбор техники</h3>
+          <p class="text-gray-700 dark:text-slate-400">Наглядный пример правильного выполнения упражнения.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Фишки платформы -->
+<section class="max-w-screen-xl mx-auto py-12 px-4">
+  <div class="text-center mb-12">
+    <h2 class="text-3xl md:text-4xl font-bold text-[#283618] dark:text-[#fefae0]" data-aos="fade-down">Получишь в 4 раза больше, чем от обычных тренировок</h2>
+  </div>
+  <div class="grid md:grid-cols-2 gap-8">
+    <!-- Item 1 -->
+    <div class="bg-stone-100 p-8 rounded-2xl shadow-lg flex items-start space-x-6 dark:bg-slate-800" data-aos="fade-up" data-aos-delay="0">
+      <div class="flex-shrink-0">
+        <svg class="w-12 h-12 text-[#bc6c25]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6-2.292m0 0V21M12 6.042A8.967 8.967 0 0 1 18 3.75m-6 2.292A8.967 8.967 0 0 0 6 3.75" /></svg>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold uppercase tracking-wider text-[#283618] mb-2 dark:text-[#fefae0]">Веди дневник тренировок</h3>
+        <p class="text-gray-600 dark:text-slate-400">Записывай результаты и отслеживай прогресс, не отходя от пособия, без тетрадок и лишних сервисов.</p>
+      </div>
+    </div>
+    <!-- Item 2 -->
+    <div class="bg-stone-100 p-8 rounded-2xl shadow-lg flex items-start space-x-6 dark:bg-slate-800" data-aos="fade-up" data-aos-delay="100">
+      <div class="flex-shrink-0">
+        <svg class="w-12 h-12 text-[#bc6c25]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" /></svg>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold uppercase tracking-wider text-[#283618] mb-2 dark:text-[#fefae0]">Изучай базу знаний</h3>
+        <p class="text-gray-600 dark:text-slate-400">Информация о тренировках, питании, здоровье. Обо всём, что поможет тебе достичь результата.</p>
+      </div>
+    </div>
+    <!-- Item 3 -->
+    <div class="bg-stone-100 p-8 rounded-2xl shadow-lg flex items-start space-x-6 dark:bg-slate-800" data-aos="fade-up" data-aos-delay="200">
+      <div class="flex-shrink-0">
+        <svg class="w-12 h-12 text-[#bc6c25]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9A2.25 2.25 0 0 0 13.5 5.25h-9A2.25 2.25 0 0 0 2.25 7.5v9A2.25 2.25 0 0 0 4.5 18.75Z" /></svg>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold uppercase tracking-wider text-[#283618] mb-2 dark:text-[#fefae0]">Смотри видеоинструкции</h3>
+        <p class="text-gray-600 dark:text-slate-400">Вместо безмолвных GIF и кучи текста, я доступно в видеоформате объясняю все нюансы выполнения упражнений.</p>
+      </div>
+    </div>
+    <!-- Item 4 -->
+    <div class="bg-stone-100 p-8 rounded-2xl shadow-lg flex items-start space-x-6 dark:bg-slate-800" data-aos="fade-up" data-aos-delay="300">
+      <div class="flex-shrink-0">
+        <svg class="w-12 h-12 text-[#bc6c25]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" /></svg>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold uppercase tracking-wider text-[#283618] mb-2 dark:text-[#fefae0]">Получай обратную связь</h3>
+        <p class="text-gray-600 dark:text-slate-400">Не даю стандартных отписок в ответ на вопросы. Каждый случай разбираю индивидуально.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Выгодные предложения -->
+<section id="offers" class="bg-[#606c38] py-12 px-4">
+  <div class="max-w-screen-xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-12 text-[#fefae0]" data-aos="fade-down">Выгодные предложения</h2>
+    <div class="grid md:grid-cols-2 gap-8 items-stretch">
+      <!-- Offer 1: Все программы -->
+      <div class="bg-[#fefae0] rounded-2xl shadow-xl p-8 flex flex-col dark:bg-slate-800" data-aos="fade-up" data-aos-delay="0">
+        <div class="flex justify-between items-start mb-4">
+          <h3 class="text-2xl font-bold text-[#283618] pr-4 dark:text-[#fefae0]">Все программы</h3>
+          <span class="flex-shrink-0 bg-[#dda15e] text-white text-sm font-bold px-3 py-1 rounded-full">70% экономия</span>
+        </div>
+        <ul class="space-y-3 text-[#283618]/80 mb-6 list-disc list-inside flex-grow dark:text-slate-300">
+          <li>4 мужских программы</li>
+          <li>4 женских программы</li>
+          <li>2 кабинета с бессрочным доступом (муж и жен)</li>
+          <li>Чат с обратной связью от меня</li>
+        </ul>
+        <div class="mt-auto flex items-center justify-between">
+            <p class="text-3xl font-bold text-[#bc6c25]">7.990 ₽</p>
+            <button class="bg-[#bc6c25] text-white px-6 py-3 rounded-lg hover:bg-[#dda15e] font-semibold text-lg transition">Получить доступ</button>
+        </div>
+      </div>
+
+      <!-- Offer 2: Программа + курс по питанию -->
+      <div class="bg-[#fefae0] rounded-2xl shadow-xl p-8 flex flex-col dark:bg-slate-800" data-aos="fade-up" data-aos-delay="100">
+        <div class="flex justify-between items-start mb-4">
+          <h3 class="text-2xl font-bold text-[#283618] pr-4 dark:text-[#fefae0]">Программа + курс по питанию</h3>
+          <span class="flex-shrink-0 bg-[#dda15e] text-white text-sm font-bold px-3 py-1 rounded-full">25% экономия</span>
+        </div>
+        <ul class="space-y-3 text-[#283618]/80 mb-6 list-disc list-inside flex-grow dark:text-slate-300">
+          <li>Любая программа на выбор</li>
+          <li>90+ лекций о питании</li>
+          <li>По 15 рационов на каждый вес</li>
+          <li>Калькуляторы КБЖУ и замеры тела</li>
+          <li>Кабинет с бессрочным доступом</li>
+          <li>Чат с обратной связью от меня</li>
+        </ul>
+        <div class="mt-auto flex items-center justify-between">
+            <p class="text-3xl font-bold text-[#bc6c25]">6.490 ₽</p>
+            <button class="bg-[#bc6c25] text-white px-6 py-3 rounded-lg hover:bg-[#dda15e] font-semibold text-lg transition">Получить доступ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Отзывы -->
+<section id="reviews" class="max-w-screen-xl mx-auto py-12 px-4 scroll-mt-20">
+  <h2 class="text-3xl font-bold text-center mb-12 text-[#283618] dark:text-[#fefae0]" data-aos="fade-down">85% подопечных достигают результата за 3 месяца</h2>
+  <div class="space-y-12">
+    
+    <div class="bg-stone-100 rounded-2xl shadow-xl overflow-hidden grid md:grid-cols-3 items-center dark:bg-slate-800" data-aos="fade-up">
+      <div class="p-8 md:py-12 md:px-12 md:col-span-2">
+        <p class="italic text-gray-700 text-xl lg:text-2xl dark:text-slate-300">"Приобрел программу тренировок и курс питания! Вообще топ! Ни один тренер не сделал такой понятный и информативный личный кабинет. Классный интерфейс, а главное все понятно! Удачи в продвижении"</p>
+      </div>
+      <div class="h-64 md:h-full w-full">
+        <img src="images/review1.jpg" alt="Отзыв клиента 1" class="w-full h-full object-cover" loading="lazy">
+      </div>
+    </div>
+
+    <div class="bg-stone-100 rounded-2xl shadow-xl overflow-hidden grid md:grid-cols-3 items-center dark:bg-slate-800" data-aos="fade-up">
+      <div class="h-64 md:h-full w-full md:order-last">
+        <img src="images/review2.jpg" alt="Отзыв клиента 2" class="w-full h-full object-cover" loading="lazy">
+      </div>
+      <div class="p-8 md:py-12 md:px-12 md:col-span-2">
+        <p class="italic text-gray-700 text-xl lg:text-2xl dark:text-slate-300">"Как же удобно работать с таким личным кабинетом, где записи можно делать, программа и видео с техникой. Видео с техникой вообще огонь..."</p>
+      </div>
+    </div>
+
+    <div class="bg-stone-100 rounded-2xl shadow-xl overflow-hidden grid md:grid-cols-3 items-center dark:bg-slate-800" data-aos="fade-up">
+      <div class="p-8 md:py-12 md:px-12 md:col-span-2">
+        <p class="italic text-gray-700 text-xl lg:text-2xl dark:text-slate-300">"Добрый день! Хотел бы Вас и вашу команду поблагодарить за ваши труды. Я наконец-то начал делать правильно упражнения и теперь отказ мышц заиграл новыми красками) Сайт тоже топовый с интересными и нужными фичами."</p>
+      </div>
+      <div class="h-64 md:h-full w-full">
+        <img src="images/review3.jpg" alt="Отзыв клиента 3" class="w-full h-full object-cover" loading="lazy">
+      </div>
+    </div>
+
+    <div class="bg-stone-100 rounded-2xl shadow-xl overflow-hidden grid md:grid-cols-3 items-center dark:bg-slate-800" data-aos="fade-up">
+      <div class="h-64 md:h-full w-full md:order-last">
+        <img src="images/review4.jpg" alt="Отзыв клиента 4" class="w-full h-full object-cover" loading="lazy">
+      </div>
+      <div class="p-8 md:py-12 md:px-12 md:col-span-2">
+        <p class="italic text-gray-700 text-xl lg:text-2xl dark:text-slate-300">"Сайт очень крутой, всё интуитивно понятно, разжёвано каждое действие до мельчайшей подробности, каждое упражнение имеет видео инструкцию с техникой выполнения и тут же дневник тренировок с которым легко отслеживать прогрессию нагрузок"</p>
+      </div>
+    </div>
+
+    <div class="bg-stone-100 rounded-2xl shadow-xl overflow-hidden grid md:grid-cols-3 items-center dark:bg-slate-800" data-aos="fade-up">
+      <div class="p-8 md:py-12 md:px-12 md:col-span-2">
+        <p class="italic text-gray-700 text-xl lg:text-2xl dark:text-slate-300">"Здравствуйте! Купила у вас программу и я в шоке. Все так идеально и удобно в приложении смотреть и читать. Спасибо Вам огромное за такой высокий и качественный сервис. Лучший!"</p>
+      </div>
+      <div class="h-64 md:h-full w-full">
+        <img src="images/review5.jpg" alt="Отзыв клиента 5" class="w-full h-full object-cover" loading="lazy">
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- Для кого и как начать -->
+<section class="max-w-screen-xl mx-auto py-12 px-4">
+  <div class="grid md:grid-cols-2 gap-8">
+    <!-- Карточка 1: Для кого -->
+    <div class="bg-stone-100 rounded-2xl shadow-xl p-8 flex flex-col dark:bg-slate-800" data-aos="fade-up" data-aos-delay="0">
+      <h3 class="text-2xl font-bold text-[#283618] mb-6 text-center dark:text-[#fefae0]">Это для тебя, если ты хочешь:</h3>
+      <ul class="space-y-3 text-gray-700 list-disc list-inside flex-grow dark:text-slate-300">
+        <li>Набрать мышцы, сделать торс рельефнее, руки и ноги мощнее, а грудь больше</li>
+        <li>Убрать растущий живот и упрямый жир на боках</li>
+        <li>Вернуть себе тонус и поднять энергию</li>
+        <li>Полюбить тренировочный процесс</li>
+        <li>Прокачать дисциплину и устранить срывы</li>
+      </ul>
+    </div>
+
+    <!-- Карточка 2: Как начать -->
+    <div class="bg-stone-100 rounded-2xl shadow-xl p-8 flex flex-col dark:bg-slate-800" data-aos="fade-up" data-aos-delay="100">
+      <h3 class="text-2xl font-bold text-[#283618] mb-6 text-center dark:text-[#fefae0]">Как начать:</h3>
+      <ul class="space-y-3 text-gray-700 list-decimal list-inside flex-grow dark:text-slate-300">
+        <li>Выбери или подбери программу</li>
+        <li>Произведи оплату любым удобным способом</li>
+        <li>Получи ссылку для входа и пароль на свою почту</li>
+        <li>Вступай в чат обратной связи из кабинета</li>
+        <li>Занимайся через сайт или Telegram бота</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="bg-[#606c38] py-16 px-4 scroll-mt-20">
+  <div class="max-w-screen-md mx-auto" data-aos="fade-up">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#fefae0]" data-aos="fade-down">Частые вопросы</h2>
+    <div id="accordion-collapse" data-accordion="collapse" class="space-y-4" >
+      <h2 id="faq-heading-1">
+        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-[#283618] bg-[#fefae0] rounded-lg shadow-sm focus:ring-4 focus:ring-[#dda15e]/50 transition aria-expanded:rounded-b-none dark:bg-slate-800 dark:text-[#fefae0] dark:focus:ring-slate-700" data-accordion-target="#faq-body-1" aria-expanded="false" aria-controls="faq-body-1">
+          <span>Что из себя представляет программа тренировок?</span>
+          <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+      </h2>
+      <div id="faq-body-1" class="hidden" aria-labelledby="faq-heading-1">
+        <div class="p-5 bg-[#fefae0] rounded-b-lg shadow-sm border-t border-[#e9e4c8] dark:bg-slate-800 dark:border-slate-700">
+          <p class="text-[#283618] dark:text-slate-300">Программы идеально сбалансированы, содержат все необходимые инструкции. Я расписал порядок упражнений, подходы, повторения и отснял видеосопровождение. Всё это находится на удобной авторской платформе. А также есть чат с обратной связью, где отвечаю лично я.</p>
+        </div>
+      </div>
+      <h2 id="faq-heading-2">
+        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-[#283618] bg-[#fefae0] rounded-lg shadow-sm focus:ring-4 focus:ring-[#dda15e]/50 transition aria-expanded:rounded-b-none dark:bg-slate-800 dark:text-[#fefae0] dark:focus:ring-slate-700" data-accordion-target="#faq-body-2" aria-expanded="false" aria-controls="faq-body-2">
+          <span>В каком формате выдаются тренировки?</span>
+          <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+      </h2>
+      <div id="faq-body-2" class="hidden" aria-labelledby="faq-heading-2">
+        <div class="p-5 bg-[#fefae0] rounded-b-lg shadow-sm border-t border-[#e9e4c8] dark:bg-slate-800 dark:border-slate-700">
+          <p class="text-[#283618] dark:text-slate-300">Ты приобретаешь вечный доступ в личный кабинет, где тебя ждёт выбранная программа. Ссылка придёт на электронную почту после оплаты. Личный кабинет работает как в браузере, так и прямо в Telegram.</p>
+        </div>
+      </div>
+      <h2 id="faq-heading-3">
+        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-[#283618] bg-[#fefae0] rounded-lg shadow-sm focus:ring-4 focus:ring-[#dda15e]/50 transition aria-expanded:rounded-b-none dark:bg-slate-800 dark:text-[#fefae0] dark:focus:ring-slate-700" data-accordion-target="#faq-body-3" aria-expanded="false" aria-controls="faq-body-3">
+          <span>Про суперсеты</span>
+          <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+      </h2>
+      <div id="faq-body-3" class="hidden" aria-labelledby="faq-heading-3">
+        <div class="p-5 bg-[#fefae0] rounded-b-lg shadow-sm border-t border-[#e9e4c8] dark:bg-slate-800 dark:border-slate-700">
+          <p class="text-[#283618] dark:text-slate-300">Программы доступны в двух вариантах сразу: с суперсетами и без. Суперсеты позволяют ускорить тренировку, но если тренажеры часто заняты или зал недостаточно оборудован, суперсеты можно отключить в личном кабинете.</p>
+        </div>
+      </div>
+      <h2 id="faq-heading-4">
+        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-[#283618] bg-[#fefae0] rounded-lg shadow-sm focus:ring-4 focus:ring-[#dda15e]/50 transition aria-expanded:rounded-b-none dark:bg-slate-800 dark:text-[#fefae0] dark:focus:ring-slate-700" data-accordion-target="#faq-body-4" aria-expanded="false" aria-controls="faq-body-4">
+          <span>Слабо оборудованный зал</span>
+          <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+      </h2>
+      <div id="faq-body-4" class="hidden" aria-labelledby="faq-heading-4">
+        <div class="p-5 bg-[#fefae0] rounded-b-lg shadow-sm border-t border-[#e9e4c8] dark:bg-slate-800 dark:border-slate-700">
+          <p class="text-[#283618] dark:text-slate-300">Большинство упражнений имеют замену прямо в кабинете, однако для тренинга необходим минимальный набор, такой как гантели, штанга и базовые тренажеры. Если чего-то нет, пишите в чат, будем подбирать замену.</p>
+        </div>
+      </div>
+      <h2 id="faq-heading-5">
+        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-[#283618] bg-[#fefae0] rounded-lg shadow-sm focus:ring-4 focus:ring-[#dda15e]/50 transition aria-expanded:rounded-b-none dark:bg-slate-800 dark:text-[#fefae0] dark:focus:ring-slate-700" data-accordion-target="#faq-body-5" aria-expanded="false" aria-controls="faq-body-5">
+          <span>Подходит ли совсем начинающим?</span>
+          <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+      </h2>
+      <div id="faq-body-5" class="hidden" aria-labelledby="faq-heading-5">
+        <div class="p-5 bg-[#fefae0] rounded-b-lg shadow-sm border-t border-[#e9e4c8] dark:bg-slate-800 dark:border-slate-700">
+          <p class="text-[#283618] dark:text-slate-300">Да, для начинающих атлетов программы содержат дополнительные инструкции. Ты можешь не иметь никакого опыта, а в ходе прохождения программы получить фундаментальные знания, после чего помогать напарникам.</p>
+        </div>
+      </div>
+      <h2 id="faq-heading-6">
+        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-[#283618] bg-[#fefae0] rounded-lg shadow-sm focus:ring-4 focus:ring-[#dda15e]/50 transition aria-expanded:rounded-b-none dark:bg-slate-800 dark:text-[#fefae0] dark:focus:ring-slate-700" data-accordion-target="#faq-body-6" aria-expanded="false" aria-controls="faq-body-6">
+          <span>На сколько даётся программа тренировок?</span>
+          <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+      </h2>
+      <div id="faq-body-6" class="hidden" aria-labelledby="faq-heading-6">
+        <div class="p-5 bg-[#fefae0] rounded-b-lg shadow-sm border-t border-[#e9e4c8] dark:bg-slate-800 dark:border-slate-700">
+          <p class="text-[#283618] dark:text-slate-300">Доступ навсегда. По одной программе можно заниматься снова и снова, хоть всю жизнь.</p>
+        </div>
+      </div>
+      <h2 id="faq-heading-7">
+        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-[#283618] bg-[#fefae0] rounded-lg shadow-sm focus:ring-4 focus:ring-[#dda15e]/50 transition aria-expanded:rounded-b-none dark:bg-slate-800 dark:text-[#fefae0] dark:focus:ring-slate-700" data-accordion-target="#faq-body-7" aria-expanded="false" aria-controls="faq-body-7">
+          <span>Нужен ли тренер при покупке программы?</span>
+          <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+      </h2>
+      <div id="faq-body-7" class="hidden" aria-labelledby="faq-heading-7">
+        <div class="p-5 bg-[#fefae0] rounded-b-lg shadow-sm border-t border-[#e9e4c8] dark:bg-slate-800 dark:border-slate-700">
+          <p class="text-[#283618] dark:text-slate-300">Нет, тренер не нужен. Видеоуроки всё подробно покажут, а свои вопросы ты всегда можешь задать в закрытом чате.</p>
+        </div>
+      </div>
+      <h2 id="faq-heading-8">
+        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-[#283618] bg-[#fefae0] rounded-lg shadow-sm focus:ring-4 focus:ring-[#dda15e]/50 transition aria-expanded:rounded-b-none dark:bg-slate-800 dark:text-[#fefae0] dark:focus:ring-slate-700" data-accordion-target="#faq-body-8" aria-expanded="false" aria-controls="faq-body-8">
+          <span>Как войти в личный кабинет?</span>
+          <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+      </h2>
+      <div id="faq-body-8" class="hidden" aria-labelledby="faq-heading-8">
+        <div class="p-5 bg-[#fefae0] rounded-b-lg shadow-sm border-t border-[#e9e4c8] dark:bg-slate-800 dark:border-slate-700">
+          <p class="text-[#283618] dark:text-slate-300">Вход в личный кабинет находится вверху сайта. А также отправлен на электронный адрес при покупке.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Футер -->
+<footer class="bg-[#fefae0] border-t border-[#dda15e] dark:bg-slate-900 dark:border-slate-700">
+  <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+    <div class="md:flex md:justify-between">
+      <div class="mb-6 md:mb-0 md:w-1/4">
+        <a href="index.html" class="flex items-center">
+          <span class="self-center text-2xl font-bold whitespace-nowrap text-[#283618] dark:text-[#fefae0]">CoreX</span>
+        </a>
+        <p class="mt-4 text-sm text-gray-600 dark:text-slate-400">
+          Эффективные программы тренировок для достижения тела твоей мечты.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+        <div>
+          <h2 class="mb-6 text-sm font-semibold text-[#283618] uppercase dark:text-white">Навигация</h2>
+          <ul class="text-gray-600 dark:text-slate-400 font-medium">
+            <li class="mb-4">
+              <a href="index.html#about" class="hover:underline">О подходе</a>
+            </li>
+            <li class="mb-4">
+              <a href="programs.html" class="hover:underline">Программы</a>
+            </li>
+            <li class="mb-4">
+              <a href="index.html#reviews" class="hover:underline">Отзывы</a>
+            </li>
+            <li>
+              <a href="contacts.html" class="hover:underline">Контакты</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="mb-6 text-sm font-semibold text-[#283618] uppercase dark:text-white">Правовая информация</h2>
+          <ul class="text-gray-600 dark:text-slate-400 font-medium">
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Публичная оферта</a>
+            </li>
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Политика конфиденциальности</a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline">Правила оплаты</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="mb-6 text-sm font-semibold text-[#283618] uppercase dark:text-white">Социальные сети</h2>
+          <ul class="text-gray-600 dark:text-slate-400 font-medium">
+            <li class="mb-4">
+              <a href="#" class="hover:underline ">Telegram</a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline">Instagram</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr class="my-6 border-gray-300 sm:mx-auto dark:border-slate-700 lg:my-8" />
+    <div class="sm:flex sm:items-center sm:justify-between">
+      <span class="text-sm text-gray-600 sm:text-center dark:text-slate-400">© 2025 <a href="index.html" class="hover:underline">CoreX™</a>. Все права защищены.
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script type="module" src="js/main.js" defer></script>
+<script>
+  AOS.init({
+    // Global settings:
+    disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+    startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+    initClassName: 'aos-init', // class applied after initialization
+    animatedClassName: 'aos-animate', // class applied on animation
+    useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+    disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+    debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+    throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+    offset: 120, // offset (in px) from the original trigger point
+    delay: 0, // values from 0 to 3000, with step 50ms
+    duration: 600, // values from 0 to 3000, with step 50ms
+    easing: 'ease-in-out', // default easing for AOS animations
+    once: true, // whether animation should happen only once - while scrolling down
+    mirror: false, // whether elements should animate out while scrolling past them
+    anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+  }); defer
+</script>
+
+</body>
+</html>

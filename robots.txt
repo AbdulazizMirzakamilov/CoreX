@@ -1,0 +1,8 @@
+User-agent: *
+
+# Запретить индексацию административных и пользовательских страниц
+Disallow: /admin.html
+Disallow: /account.html
+
+# Указать путь к карте сайта
+Sitemap: https://example.com/sitemap.xml
